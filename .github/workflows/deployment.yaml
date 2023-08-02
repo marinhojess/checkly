@@ -6,6 +6,7 @@ on:
       - develop
 jobs:
   deploy-staging:
+    if: github.ref_name == 'develop'
     runs-on: ubuntu-latest
     environment:
       name: Staging
@@ -34,6 +35,7 @@ jobs:
             https://api.github.com/repos/marinhojess/checkly/deployments/$deployment_id/statuses \
             -d '{"environment":"Staging","state":"success","environment_url": "https://teste-staging.com","description":"Deployment finished successfully."}'
   deploy-production:
+    if: github.ref_name == 'main'
     runs-on: ubuntu-latest
     needs: deploy-staging
     environment:
