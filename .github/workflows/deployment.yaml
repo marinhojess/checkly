@@ -31,6 +31,7 @@ jobs:
             -d '{"ref":"main","required_contexts": []}')
           deployment_id=$(echo "$response" | jq '.id')
           echo "DEPLOYMENT_ID=$deployment_id" >> $GITHUB_ENV
+          echo $response
 
   update_deployment_status:
     needs: get_deployment_id
